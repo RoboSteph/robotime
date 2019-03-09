@@ -18,9 +18,10 @@ def main():
     postEvent(buildEvent())
 
 
-#TODO - option/flag for more input
+#TODO - option/flag for more input, defaults if not
+#TODO - Can I have an option to read in previous event and offer that as default? 
 
-##Defaults - Can I have an option to read in previous event and offer that as default? 
+##Defaults
 #Summary: Name 
 #Location: Blank/Current
 #Color: Blank/Green 
@@ -32,7 +33,7 @@ def buildEvent():
     current_time = datetime.datetime.now()
     event_summary = input("Please enter the name of your time block: ") #TODO - Can I make the following inputs optional? Let the user skip all and set to defaults if 
     event_location = input("Would you like to enter an address? Press Enter to skip: ") or "17348 SW Lawton Beaverton 97003"
-    event_color = input("What color is your event? Choose a number 1-11 or press Enter to skip: ") or 3
+    event_color = input("What color is your event? Choose a number 1-11 or press Enter to skip: ") or 4
     event_description = input("Would you like to enter a description for your time block? Press Enter to skip: ") 
     event_length = input("How long is your event (in minutes)? Press Enter for default 30 minutes. ") or 30
     end_time = current_time + datetime.timedelta(minutes=int(event_length))
