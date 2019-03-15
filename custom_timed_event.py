@@ -1,7 +1,6 @@
 #Create a timed event in the user's primary Google Calendar 
 #Stephanie Simpler
 #1-25-2019
-#Based on quickstart.py from Google Calendar API Docs
 
 from __future__ import print_function
 import datetime
@@ -52,7 +51,8 @@ def buildEvent():
         },
     }
     return full_event_info
-
+    
+#Based on quickstart.py from Google Calendar API Docs
 def postEvent(event_info):
     creds = None
     if os.path.exists('token.pickle'):
