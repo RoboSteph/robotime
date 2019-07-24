@@ -16,10 +16,6 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 def main():
     postEvent(buildEvent())
 
-
-#TODO - option/flag for more input, defaults if not
-#TODO - Can I have an option to read in previous event and offer that as default? 
-
 ##Defaults
 #Summary: Name 
 #Location: Blank/Current
@@ -27,10 +23,9 @@ def main():
 #Description: Blank
 #Length: 30 
 
-
 def buildEvent():
     current_time = datetime.datetime.now()
-    event_summary = input("Please enter the name of your time block: ") #TODO - Can I make the following inputs optional? Let the user skip all and set to defaults if 
+    event_summary = input("Please enter the name of your time block: ") #TODO - Can I make the following inputs optional? Let the user skip all and set to defaults 
     event_location = input("Would you like to enter an address? Press Enter to skip: ") or "17348 SW Lawton Beaverton 97003"
     event_color = input("What color is your event? Choose a number 1-11 or press Enter to skip: ") or 4
     event_description = input("Would you like to enter a description for your time block? Press Enter to skip: ") 
@@ -82,3 +77,6 @@ def postEvent(event_info):
 
 if __name__ == '__main__':
     main()
+
+#TODO - option/flag for more input, defaults if not
+#TODO - Can I have an option to read in previous event and offer that as default? 
