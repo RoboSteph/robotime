@@ -1,7 +1,6 @@
 #Create an all day, repeatable event in the user's primary Google Calendar 
 #Stephanie Simpler
 #1-25-2019
-#Based on quickstart.py from Google Calendar API Docs
 
 from __future__ import print_function
 import datetime
@@ -15,6 +14,7 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/calendar.events'] 
 
 def main():
+    #Based on quickstart.py from Google Calendar API Docs
     creds = None
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
@@ -34,7 +34,6 @@ def main():
 
     service = build('calendar', 'v3', credentials=creds)
 
-    #Call Calendar API
 
     #Create event
     print(datetime.datetime.now().isoformat())
