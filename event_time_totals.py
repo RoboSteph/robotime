@@ -61,22 +61,20 @@ def readEvents():
 		start = event['start'].get('dateTime', event['start'].get('date'))
 		end = event['end'].get('dateTime', event['end'].get('date'))
 		duration = datetime.datetime.fromisoformat(end) - datetime.datetime.fromisoformat(start)
-		# print('Start Time: ' + start, '|', 'End Time: ' + end, '|', event['summary'], '|', 'Duration: ' + str(duration))
 		event_d_dict[summary].append([start, end, duration])
 
 	event_dict = dict(event_d_dict)
 
 	# print(event_dict)
 
-	print('|-----------------------------|')
-	print('| Total time spent this week: |')
-	print('|-----------------------------|')
+	print('|------------------------------------|')
+	print('| Total time spent in the past week: |')
+	print('|------------------------------------|')
 	for key in event_dict:
-		# print(key)
-		total = datetime.timedelta(seconds=0) #empty datetime to add durations to 
+		#empty datetime.timedelta to add durations to 
+		total = datetime.timedelta(seconds=0) 
 		for t in event_dict[key]:
-			# print(t[2])
-			total += t[2] #NOT working on all events
+			total += t[2]
 
 		print(key, total)
 
