@@ -79,4 +79,5 @@ if __name__ == '__main__':
     main()
 
 #TODO - option/flag for more input, defaults if not
-#TODO - Can I have an option to read in previous event and offer that as default? 
+#can I have an option to read in previous event and offer that as default? 
+#read in user's time zone, location (or does Calendar store it)
