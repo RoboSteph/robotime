@@ -17,9 +17,9 @@ from collections import defaultdict
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 def main():
-	readEvents()
+	print_totals(read_events())
 
-def readEvents():
+def read_events():
 	#based on quickstart.py from Calendar API docs
 	creds = None
 	if os.path.exists('token.pickle'):
@@ -66,7 +66,9 @@ def readEvents():
 	event_dict = dict(event_d_dict)
 
 	# print(event_dict)
+	return event_dict
 
+def print_totals(event_dict):
 	print('|------------------------------------|')
 	print('| Total time spent in the past week: |')
 	print('|------------------------------------|')
@@ -77,6 +79,8 @@ def readEvents():
 			total += t[2]
 
 		print(key, total)
+
+
 
 if __name__ == '__main__':
 	main()

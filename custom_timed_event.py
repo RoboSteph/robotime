@@ -8,13 +8,13 @@ import pickle
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request 
+from google.auth.transport.requests import Request
 
 #read/write access to events
 SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 
 def main():
-    postEvent(buildEvent())
+    post_event(build_event())
 
 ##Defaults
 #Summary: Name 
@@ -23,7 +23,7 @@ def main():
 #Description: Blank
 #Length: 30 
 
-def buildEvent():
+def build_event():
     current_time = datetime.datetime.now()
     event_summary = input("Please enter the name of your time block: ") #TODO - Can I make the following inputs optional? Let the user skip all and set to defaults 
     event_location = input("Would you like to enter an address? Press Enter to skip: ") or "17348 SW Lawton Beaverton 97003"
@@ -48,7 +48,7 @@ def buildEvent():
     return full_event_info
     
 #Based on quickstart.py from Google Calendar API Docs
-def postEvent(event_info):
+def post_event(event_info):
     creds = None
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
