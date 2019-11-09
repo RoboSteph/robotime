@@ -6,6 +6,7 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
+import random
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -27,7 +28,7 @@ def build_event():
     current_time = datetime.datetime.now()
     event_summary = input("Please enter the name of your time block: ") #TODO - Can I make the following inputs optional? Let the user skip all and set to defaults 
     event_location = input("Would you like to enter an address? Press Enter to skip: ") or "17348 SW Lawton Beaverton 97003"
-    event_color = input("What color is your event? Choose a number 1-11 or press Enter to skip: ") or 4
+    event_color = input("What color is your event? Choose a number 1-11 or press Enter to skip: ") or random.randrange(11)
     event_description = input("Would you like to enter a description for your time block? Press Enter to skip: ") 
     event_length = input("How long is your event (in minutes)? Press Enter for default 30 minutes. ") or 30
     end_time = current_time + datetime.timedelta(minutes=int(event_length))
