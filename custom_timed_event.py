@@ -10,6 +10,8 @@ import random
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from googleapiclient.errors import HttpError
 
 #read/write access to events
 SCOPES = ['https://www.googleapis.com/auth/calendar.events']
@@ -51,9 +53,8 @@ def build_event():
 #Based on quickstart.py from Google Calendar API Docs
 def post_event(event_info):
     creds = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     #If no valid creds, let user log in
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
@@ -63,18 +64,20 @@ def post_event(event_info):
                 'credentials.json', SCOPES)
             creds = flow.run_local_server()
         #Save creds for next run
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+    try:
+        service = build('calendar', 'v3', credentials=creds)
 
-    service = build('calendar', 'v3', credentials=creds)
+        #Call Calendar API
+        now = datetime.datetime.utcnow().isoformat() + 'Z' #UTC time <<<<working?
 
-    #Call Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z' #UTC time <<<<working?
+        event = event_info
+        event = service.events().insert(calendarId='primary', body=event).execute()
+        print('Event created: %s' % (event.get('htmlLink')))
 
-    event = event_info
-    event = service.events().insert(calendarId='primary', body=event).execute()
-    print('Event created: %s' % (event.get('htmlLink')))    
-
+    except HttpError as error:
+        print('Error occured: %s' % error)
 
 if __name__ == '__main__':
     main()

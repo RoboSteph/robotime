@@ -24,7 +24,7 @@ def buildEvent():
     event_description = input("Would you like to enter a description for your time block? Press Enter to skip: ") #TODO - double check still works when empty
     full_event_info = {
         'summary': event_summary,
-        'location': '17348 SW Lawton St., Beaverton, OR 97003', #TODO - replace with current location
+        'location': 'Portland, OR', #TODO - replace with current location
         'description': event_description,
         'start': {
             'dateTime': current_time.isoformat(),
