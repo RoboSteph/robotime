@@ -6,7 +6,7 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
-import random 
+import random
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -24,7 +24,12 @@ def build_event():
     event_color = input("What color is your event? Choose a number 1-11 or press Enter to skip: ") or random.randrange(11)
     event_description = input("Would you like to enter a description for your event? Press Enter to skip: ")
     event_start_date = input("When is the start date? Format YYYY-MM-DD Press Enter for today:") or today_date
-    event_end_date = input("When is the end date? Format YYYY-MM-DD Press Enter for today:") or today_date
+    event_end_date = input("When is the end date? Please note this is the day after the final active day of your event. Format YYYY-MM-DD Press Enter for today:") or today_date
+    # attendee_info = None
+    # event_attendees = input("Would you like to invite anyone? y for yes or Enter to skip:")
+    #
+    # if event_attendees is "y":
+
     full_event_info = {
         'summary': event_summary,
         'location': event_location,
@@ -37,9 +42,12 @@ def build_event():
         },
         'end': {
             # 'dateTime': end_time.isoformat(),
-            'date': event_end_date,
+            'date': event_end_date, #TODO end date is not inclusive, so user must enter day after the last day of their event. Why is it done this way?
             'timeZone': 'America/Los_Angeles'
         },
+        #TODO try adding attendees - cannot be none, would need to build out separately
+        #Can I use a y/n input to determine if attendees or reminders are included?
+        #TODO try adding reminders - does this need to be built separately? Can we use: 'useDefault': True,
     }
     return full_event_info
 
